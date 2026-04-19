@@ -4,38 +4,56 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Telegram:
-    API_ID = int(env.get("16073849"))
-    API_HASH = str(env.get("e84dd69cd0504b8b45b2fd6a4e19068d"))
-    BOT_TOKEN = str(env.get("6476554204:AAEXUHdO6GcRDaT5qd1eNnhGbZ-i7K0jWfQ"))
+    API_ID = int(env.get("API_ID", "16073849"))
+    API_HASH = env.get("API_HASH", "e84dd69cd0504b8b45b2fd6a4e19068d")
+    BOT_TOKEN = env.get("BOT_TOKEN", "6476554204:AAEXUHdO6GcRDaT5qd1eNnhGbZ-i7K0jWfQ")
     OWNER_ID = int(env.get('OWNER_ID', '5536032493'))
-    WORKERS = int(env.get("WORKERS", "6"))  # 6 workers = 6 commands at once
-    DATABASE_URL = str(env.get('mongodb+srv://bsadmin:bsadmin12@cluster0.anisucu.mongodb.net/?appName=Cluster0'))
-    UPDATES_CHANNEL = str(env.get('UPDATES_CHANNEL', "BSHEGDE5"))
-    SESSION_NAME = str(env.get('SESSION_NAME', 'FileStream'))
-    FORCE_SUB_ID = env.get('-1002088921495', None)
-    FORCE_SUB = env.get('-1002088921495', False)
-    FORCE_SUB = True if str(FORCE_SUB).lower() == "true" else False
+
+    WORKERS = int(env.get("WORKERS", "6"))
+
+    DATABASE_URL = env.get(
+        "DATABASE_URL",
+        "mongodb+srv://bsadmin:bsadmin12@cluster0.anisucu.mongodb.net/?retryWrites=true&w=majority"
+    )
+
+    UPDATES_CHANNEL = env.get('UPDATES_CHANNEL', "BSHEGDE5")
+
+    SESSION_NAME = env.get('SESSION_NAME', 'FileStream')
+
+    FORCE_SUB_ID = int(env.get("FORCE_SUB_ID", "-1002088921495"))
+    FORCE_SUB = str(env.get("FORCE_SUB", "True")).lower() == "true"
+
     SLEEP_THRESHOLD = int(env.get("SLEEP_THRESHOLD", "60"))
+
     FILE_PIC = env.get('FILE_PIC', "https://graph.org/file/5bb9935be0229adf98b73.jpg")
     START_PIC = env.get('START_PIC', "https://graph.org/file/290af25276fa34fa8f0aa.jpg")
     VERIFY_PIC = env.get('VERIFY_PIC', "https://graph.org/file/736e21cc0efa4d8c2a0e4.jpg")
+
     MULTI_CLIENT = False
-    FLOG_CHANNEL = int(env.get("-1001997350110", None))   # Logs channel for file logs
-    ULOG_CHANNEL = int(env.get("-1001997350110", None))   # Logs channel for user logs
+
+    FLOG_CHANNEL = int(env.get("FLOG_CHANNEL", "-1001997350110"))
+    ULOG_CHANNEL = int(env.get("ULOG_CHANNEL", "-1001997350110"))
+
     MODE = env.get("MODE", "primary")
-    SECONDARY = True if MODE.lower() == "secondary" else False
-    AUTH_USERS = list(set(int(x) for x in str(env.get("AUTH_USERS", "5536032493")).split()))
+    SECONDARY = MODE.lower() == "secondary"
+
+    AUTH_USERS = list(set(
+        int(x) for x in env.get("AUTH_USERS", "5536032493").split()
+    ))
+
 
 class Server:
     PORT = int(env.get("PORT", 8080))
-    BIND_ADDRESS = str(env.get("BIND_ADDRESS", "0.0.0.0"))
+    BIND_ADDRESS = env.get("BIND_ADDRESS", "0.0.0.0")
     PING_INTERVAL = int(env.get("PING_INTERVAL", "1200"))
-    HAS_SSL = str(env.get("HAS_SSL", "0").lower()) in ("1", "true", "t", "yes", "y")
-    NO_PORT = str(env.get("NO_PORT", "0").lower()) in ("1", "true", "t", "yes", "y")
-    FQDN = str(env.get("FQDN", BIND_ADDRESS))
+
+    HAS_SSL = env.get("HAS_SSL", "0").lower() in ("1", "true", "yes")
+    NO_PORT = env.get("NO_PORT", "0").lower() in ("1", "true", "yes")
+
+    FQDN = env.get("FQDN", BIND_ADDRESS)
+
     URL = "http{}://{}{}/".format(
-        "s" if HAS_SSL else "", FQDN, "" if NO_PORT else ":" + str(PORT)
+        "s" if HAS_SSL else "",
+        FQDN,
+        "" if NO_PORT else ":" + str(PORT)
     )
-
-
-
