@@ -20,7 +20,7 @@ class Telegram:
 
     SESSION_NAME = env.get('SESSION_NAME', 'FileStream')
 
-   FORCE_SUB_ID = env.get("FORCE_SUB_ID", "-1002088921495")
+    FORCE_SUB_ID = env.get("FORCE_SUB_ID", "-1002088921495")  # ✅ fixed indent
     FORCE_SUB = str(env.get("FORCE_SUB", "True")).lower() == "true"
 
     SLEEP_THRESHOLD = int(env.get("SLEEP_THRESHOLD", "60"))
