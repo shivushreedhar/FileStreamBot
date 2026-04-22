@@ -50,7 +50,7 @@ class Server:
     HAS_SSL = env.get("HAS_SSL", "0").lower() in ("1", "true", "yes")
     NO_PORT = env.get("NO_PORT", "0").lower() in ("1", "true", "yes")
 
-   FQDN = env.get("FQDN", "filestreambot.herokuapp.com")
+    FQDN = env.get("FQDN", "filestreambot.herokuapp.com")
 
     URL = "http{}://{}{}/".format(
         "s" if HAS_SSL else "",
