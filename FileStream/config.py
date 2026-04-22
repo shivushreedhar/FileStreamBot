@@ -52,8 +52,4 @@ class Server:
 
     FQDN = env.get("FQDN", "filestreambot.herokuapp.com")
 
-    URL = "http{}://{}{}/".format(
-        "s" if HAS_SSL else "",
-        FQDN,
-        "" if NO_PORT else ":" + str(PORT)
-    )
+    URL = f"https://{FQDN}/"
